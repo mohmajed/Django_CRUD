@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+</head>
+<body>
+
+<form action="" method="POST" name="vacationform">
+    {% csrf_token %}
+    <p>Description: </p>{{form.description}}<br>
+    <p>Date From: </p>{{form.date_from}}<br>
+    <p>Date To: </p>{{form.date_to}}<br>
+    <input type="submit" name="submit">
+</form>
+
+
+<script>
+    $(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $("form[name='vacationform']").validate({
+    // Specify validation rules
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      description: "required",
+      date_from: {
+        required: true,
+        // Specify that date should be validated
+        // by the built-in "date" rule
+        date: true
+      },
+      date_to: {
+        required: true,
+        // Specify that date should be validated
+        // by the built-in "date" rule
+        date: true
+      },
+    },
+    // Specify validation error messages
+    messages: {
+      description: "Please enter a description",
+      date_from: "Please enter a valid date",
+      date_to: "Please enter a valid date",
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
+});
+</script>
+
+
+</body>
+</html>
